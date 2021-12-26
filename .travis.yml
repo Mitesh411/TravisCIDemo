@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - '16.13.1'
+
+install:
+  - npm install newman
+
+script:
+  - node_modules/.bin/newman run tests/TravisCICollection.postman_collection.json -e tests/TravisCIEnv.postman_environment.json
