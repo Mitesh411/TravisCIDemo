@@ -33,7 +33,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run tests/TravisCICollection.postman_collection.json -e tests/TravisCIEnv.postman_environment.json -r htmlextra --reporters=cli,htmlextra testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+          newman run tests/TravisCICollection.postman_collection.json -e tests/TravisCIEnv.postman_environment.json -r htmlextra --reporters=cli,htmlextra testResults/htmlreport.html > testResults/runreport1.html
 
 
       # Upload the contents of Test Results directory to workspace
