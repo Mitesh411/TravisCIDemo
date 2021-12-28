@@ -20,9 +20,7 @@
 							"    pm.expect(pm.response.text()).to.include(\"Michael\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Body is correct:- Lawson\", function () {\r",
-							"    pm.response.to.have.body(\"Lawson\");\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -65,10 +63,7 @@
 							"    pm.expect(pm.response.text()).to.include(\"leader\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Your test name\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.value).to.eql(morpheus);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -196,13 +191,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
 							"\r",
-							"pm.test(\"Body matches name to be \", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"morpheus\");\r",
-							"});\r",
 							"\r",
 							"pm.test(\"Status code is 204\", function () {\r",
 							"    pm.response.to.have.status(204);\r",
