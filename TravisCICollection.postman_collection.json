@@ -95,7 +95,7 @@
 			"response": []
 		},
 		{
-			"name": "Put User",
+			"name": "Patch User",
 			"event": [
 				{
 					"listen": "test",
@@ -114,7 +114,7 @@
 				}
 			],
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -140,7 +140,7 @@
 			"response": []
 		},
 		{
-			"name": "Patch User",
+			"name": "Put User",
 			"event": [
 				{
 					"listen": "test",
@@ -159,7 +159,7 @@
 				}
 			],
 			"request": {
-				"method": "PATCH",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -289,11 +289,6 @@
 					"graphql": {
 						"query": "{\r\n  launchesPast(limit: 10) {\r\n    mission_name\r\n    launch_date_local\r\n    launch_site {\r\n      site_name_long\r\n    }\r\n    links {\r\n      article_link\r\n      video_link\r\n    }\r\n    rocket {\r\n      rocket_name\r\n      first_stage {\r\n        cores {\r\n          flight\r\n          core {\r\n            reuse_count\r\n            status\r\n          }\r\n        }\r\n      }\r\n      second_stage {\r\n        payloads {\r\n          payload_type\r\n          payload_mass_kg\r\n          payload_mass_lbs\r\n        }\r\n      }\r\n    }\r\n    ships {\r\n      name\r\n      home_port\r\n      image\r\n    }\r\n  }\r\n}",
 						"variables": ""
-					},
-					"options": {
-						"raw": {
-							"language": "json"
-						}
 					}
 				},
 				"url": {
@@ -441,6 +436,110 @@
 					],
 					"path": [
 						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAPRequestNumber",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>500</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com/webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAPNumberToDollar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"five hundred dollars\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToDollars xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <dNum>500</dNum>\r\n    </NumberToDollars>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com/webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"webservicesserver",
+						"NumberConversion.wso"
 					]
 				}
 			},
